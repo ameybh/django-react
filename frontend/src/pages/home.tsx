@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../api";
 
+type Note = {
+  id: number;
+  title: string;
+  content: string;
+};
+
 function Home() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState<Note[]>([]);
 
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -21,7 +27,7 @@ function Home() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    api.post("/api/notes/", { title, content }).then((res) => {
+    api.post("/api/notes/", { title, content }).then(() => {
       getNote();
     });
   };
